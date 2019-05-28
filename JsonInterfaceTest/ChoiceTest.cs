@@ -25,7 +25,23 @@ namespace JsonInterfaceTest
             Assert.Equal(remaining, match.RemainingText());
         }
 
-        
+        [Theory]
+        [InlineData("", "")]
+        [InlineData(null, null)]
+        [InlineData("N9c", "N9c")]
+        [InlineData("ga", "ga")]
+        public void TestChoiseFail(string text, string remaining)
+        {
+            var hex = new Choices(
+                 new Ranges('0', '9'),
+                new Ranges('a', 'f'),
+                new Ranges('A', 'F')
+                );
+
+            var match = hex.Match(text);
+            Assert.False(match.Success());
+            Assert.Equal(remaining, match.RemainingText());
+        }
 
 
     }
