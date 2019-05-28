@@ -27,5 +27,17 @@ namespace JsonInterfaceTest
             Assert.False(match.Success());
             Assert.Equal(match.RemainingText(), remaining);
         }
+
+        [Theory]
+        [InlineData("", "")]
+        [InlineData(null, null)]
+        public void TestemptyOrNullString(string text, string remaining)
+        {
+            var range = new Ranges('g', 'k');
+            var match = range.Match(text);
+            Assert.False(match.Success());
+            Assert.Equal(match.RemainingText(), remaining);
+        }
+
     }
 }
