@@ -10,7 +10,7 @@ namespace JsonInterfaceTest
 
         [Theory]
         [InlineData("abcd", "d")]
-        public void TestSequanceSuccess(string text,string remaining)
+        public void TestSequanceOfCharSuccess(string text,string remaining)
         {
             var ab = new Sequance(
                 new Charact('a'),
@@ -24,6 +24,34 @@ namespace JsonInterfaceTest
 
 
             var match = abc.Match(text);
+            Assert.True(match.Success());
+            Assert.Equal(remaining, match.RemainingText());
+        }
+
+        [Theory]
+        [InlineData("u1234", "")]
+        [InlineData("uabcdef", "ef")]
+        [InlineData("uB005 ab", " ab")]
+        public void TestSequanceOfHexSuccess(string text, string remaining)
+        {
+            var hex = new Choices(
+                new Ranges('0', '9'),
+                new Ranges('a', 'f'),
+                new Ranges('A', 'F')
+            );
+
+            var hexSeq = new Sequance(
+                new Charact('u'),
+                new Sequance(
+                    hex,
+                    hex,
+                    hex,
+                    hex
+                )
+             );
+
+
+            var match = hexSeq.Match(text);
             Assert.True(match.Success());
             Assert.Equal(remaining, match.RemainingText());
         }

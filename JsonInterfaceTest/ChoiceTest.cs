@@ -46,7 +46,7 @@ namespace JsonInterfaceTest
         [Theory]
         [InlineData("N9c", "9c")]
         [InlineData("01A", "1A")]
-        public void TestChoiseCharacterAndrangeSuccess(string text, string remaining)
+        public void TestChoiseCharacterAndRangeSuccess(string text, string remaining)
         {
             var hex = new Choices(
                 new Charact('N'),
