@@ -56,5 +56,34 @@ namespace JsonInterfaceTest
             Assert.Equal(remaining, match.RemainingText());
         }
 
+
+        [Theory]
+        [InlineData("abc", "abc")]
+        [InlineData(null, null)]
+       
+        public void TestSequanceFail(string text, string remaining)
+        {
+            var hex = new Choices(
+                new Ranges('0', '9'),
+                new Ranges('a', 'f'),
+                new Ranges('A', 'F')
+            );
+
+            var hexSeq = new Sequance(
+                new Charact('u'),
+                new Sequance(
+                    hex,
+                    hex,
+                    hex,
+                    hex
+                )
+             );
+
+
+            var match = hexSeq.Match(text);
+            Assert.False(match.Success());
+            Assert.Equal(remaining, match.RemainingText());
+        }
+
     }
 }
