@@ -21,5 +21,19 @@ namespace JsonInterfaceTest
             Assert.Equal(remainingText, match.RemainingText());
 
         }
+
+        [Theory]
+        [InlineData("true", "truX", "truX")]
+        [InlineData("", null, null)]
+        [InlineData("true", "", "")]
+
+        public void TestClassFail(string prefix, string text, string remainingText)
+        {
+            var e = new Text(prefix);
+            var match = e.Match(text);
+            Assert.False(match.Success());
+            Assert.Equal(remainingText, match.RemainingText());
+
+        }
     }
 }
