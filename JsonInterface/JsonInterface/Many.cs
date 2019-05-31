@@ -26,8 +26,6 @@ namespace JsonInterface
                 
             }
             return new SuccessMatch(textCopy);
-
-
         }
     }
 
