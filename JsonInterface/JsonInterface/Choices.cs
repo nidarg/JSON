@@ -15,12 +15,20 @@ namespace JsonInterface
 
         public IMatch Match(string text)
         {
-            foreach(var pattern in patterns)
+            string textCopy = text;
+            foreach (var pattern in patterns)
             {
-                if (pattern.Match(text).Success())
-                    return (IMatch)new SuccessMatch(text.Substring(1));
+                var match = pattern.Match(text);
+                if (match.Success()) return match;
             }
-            return (IMatch)new FailedMatch(text);
+            return new FailedMatch(textCopy);
+
+            //foreach(var pattern in patterns)
+            //{
+            //    if (pattern.Match(text).Success())
+            //        return (IMatch)new SuccessMatch(text.Substring(1));
+            //}
+            //return (IMatch)new FailedMatch(text);
         }
     }
 }

@@ -16,19 +16,30 @@ namespace JsonInterface
 
         public IMatch Match(string text)
         {
-            string textCopy = text;
+            IMatch match = new SuccessMatch(text);
             foreach (var pattern in patterns)
             {
-               
-                if (pattern.Match(text).Success())
-                {
-
-                    text = pattern.Match(text).RemainingText();
-                }
-                else return (IMatch)new FailedMatch(textCopy);
+                match = pattern.Match(match.RemainingText());
+                if (!match.Success())
+                    return new FailedMatch(text);
 
             }
-            return (IMatch)new SuccessMatch(text);
+            return match;
+
+            //string textCopy = text;
+
+            //foreach (var pattern in patterns)
+            //{
+            //    var match = pattern.Match(text);
+            //    if (match.Success())
+            //    {
+
+            //        text = match.RemainingText();
+            //    }
+            //    else return new FailedMatch(textCopy);
+
+            //}
+            //return new SuccessMatch(text);
         }  
 
     }
