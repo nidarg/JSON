@@ -74,5 +74,19 @@ namespace JsonInterfaceTest
 
         }
 
+        [Theory]
+        [InlineData("")]
+        public void TestListJsonString(string remainingText)
+        {
+            var digits = new OneOrMore(new Ranges('0', '9'));
+            var whitespace = new Many(new Any(" \r\n\t"));
+            var separator = new Sequance(whitespace, new Charact(';'), whitespace);
+            var list = new MyList(digits, separator);
+            var match = list.Match("1; 22  ;\n 333 \t; 22");
+            Assert.True(match.Success());
+            Assert.Equal(remainingText, match.RemainingText());
+
+        }
+
     }
 }
