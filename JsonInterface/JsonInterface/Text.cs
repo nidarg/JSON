@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JsonInterface
 {
-    public class Text
+    public class Text:IPattern
     {
         readonly string prefix;
 

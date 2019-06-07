@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JsonInterface
 {
-    public class Optional
+    public class Optional:IPattern
     {
         readonly IPattern pattern;
 

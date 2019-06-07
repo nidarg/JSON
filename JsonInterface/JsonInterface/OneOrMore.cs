@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JsonInterface
 {
-    public class OneOrMore
+    public class OneOrMore:IPattern
     {
         readonly IPattern pattern;
 

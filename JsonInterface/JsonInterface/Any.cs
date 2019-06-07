@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JsonInterface
 {
-    public class Any
+    public class Any:IPattern
     {
         readonly string accepted;
 
@@ -17,7 +17,7 @@ namespace JsonInterface
         {
             if(string.IsNullOrEmpty(text) || accepted.IndexOf(text[0].ToString(),StringComparison.CurrentCultureIgnoreCase) < 0)
             {
-                return (IMatch)new FailedMatch(text);
+                return new FailedMatch(text);
             }
             
             return new SuccessMatch(text.Substring(1));
