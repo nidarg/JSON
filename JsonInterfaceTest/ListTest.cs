@@ -63,6 +63,16 @@ namespace JsonInterfaceTest
             Assert.Equal(remainingText, match.RemainingText());
 
         }
+        [Theory]
+        [InlineData("")]
+        public void TestListSuccessEmptyString(string remainingText)
+        {
+            var a = new MyList(new Ranges('0', '9'), new Charact(','));
+            var match = a.Match("");
+            Assert.True(match.Success());
+            Assert.Equal(remainingText, match.RemainingText());
+
+        }
 
     }
 }
